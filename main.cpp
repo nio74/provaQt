@@ -40,16 +40,21 @@ void Clear()
 
 void clamp(int*, int, int);
 
+struct Hero{
+    int x;
+    int y;
+    char glyph;
+};
+
 int main()
 {
 
-    char hero_glyph = '@';
-
-    int hero_x = 5;
-    int hero_y = 7;
+    //char hero_glyph = '@';
+    //int hero_x = 5, hero_y = 7;
+    Hero hero {5,7,'@'};
     bool running = true;
 
-    cout << "Il nostro eroe " << hero_glyph << " ti saluta \n";
+    cout << "Il nostro eroe " << hero.glyph << " ti saluta \n";
     cout << "The End \n";
 
     //init Mappa
@@ -73,9 +78,9 @@ int main()
             {
                 for (auto x = 0; x < W; x++)
                 {
-                    if (hero_x == x && hero_y == y)
+                    if (hero.x == x && hero.y == y)
                     {
-                        cout << hero_glyph;
+                        cout << hero.glyph;
                     }else
 
                         cout << map[y][x];
@@ -93,23 +98,23 @@ int main()
             }
             else if(cmd == 'd')
             {
-                hero_x++;
-                clamp(&hero_x, 0, W-1);
+                hero.x++;
+                clamp(&hero.x, 0, W-1);
             }
             else if (cmd == 'a')
             {
-                hero_x--;
-                clamp(&hero_x, 0, W - 1);
+                hero.x--;
+                clamp(&hero.x, 0, W - 1);
             }
             else if (cmd == 'w')
             {
-                hero_y--;
-                clamp(&hero_y, 0, H - 1);
+                hero.y--;
+                clamp(&hero.y, 0, H - 1);
             }
             else if (cmd == 's')
             {
-                hero_y++;
-                clamp(&hero_y, 0, H - 1);
+                hero.y++;
+                clamp(&hero.y, 0, H - 1);
             }
     }
 
