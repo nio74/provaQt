@@ -63,7 +63,7 @@ char command_prompt(){
  * @param dy
  */
 
-void  muve_entuty(Entity& entity ,int dx, int dy ){
+void  move_entity(Entity& entity ,int dx, int dy ){
 
     entity.y += dx;
     entity.y += dy;
@@ -128,23 +128,19 @@ int main()
             }
             else if(cmd == 'd')
             {
-                hero.x++;
-                clamp(&hero.x, 0, W-1);
+                move_entity(hero,+1,0);
             }
             else if (cmd == 'a')
             {
-                hero.x--;
-                clamp2(hero.x, 0, W - 1);
+                move_entity(hero,-1,0);
             }
             else if (cmd == 'w')
             {
-                hero.y--;
-                clamp(&hero.y, 0, H - 1);
+              move_entity(hero,0,-1);
             }
             else if (cmd == 's')
             {
-                hero.y++;
-                clamp(&hero.y, 0, H - 1);
+                move_entity(hero,0,+1);
             }
     }
 
