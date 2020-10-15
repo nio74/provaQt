@@ -39,23 +39,52 @@ void Clear()
 }
 
 void clamp(int*, int, int);
+void clamp2(int&, int, int);
 
-struct Hero{
+struct Entity{
     int x;
     int y;
     char glyph;
 };
+
+char command_prompt(){
+
+    char cmd;
+    cout << endl << "> ";
+    cin >> cmd;
+    return  cmd;
+
+}
+
+/**
+ * @brief muove entità a destra o a sinistra
+ * @param entity
+ * @param dx
+ * @param dy
+ */
+
+void  muve_entuty(Entity& entity ,int dx, int dy ){
+
+    entity.y += dx;
+    entity.y += dy;
+    clamp2(entity.x,0,W-1);
+    clamp2(entity.x,0,H-1);
+}
 
 int main()
 {
 
     //char hero_glyph = '@';
     //int hero_x = 5, hero_y = 7;
-    Hero hero {5,7,'@'};
+    Entity hero {5,7,'@'};
+    Entity orc{10,10,'*'};
     bool running = true;
 
+    /*
     cout << "Il nostro eroe " << hero.glyph << " ti saluta \n";
     cout << "The End \n";
+    */
+
 
     //init Mappa
     init_map();
@@ -81,17 +110,18 @@ int main()
                     if (hero.x == x && hero.y == y)
                     {
                         cout << hero.glyph;
-                    }else
-
+                    }else if (orc.x == x && orc.y == y){
+                        cout << orc.glyph;
+                    }
+                    else
                         cout << map[y][x];
                 }
 
                 cout << endl;
 
             }
-            char cmd;
-            cout << endl << "> ";
-            cin >> cmd;
+            char cmd = command_prompt();
+
             if (cmd == 'q')//quit command
             {
                 running = false;
@@ -104,7 +134,7 @@ int main()
             else if (cmd == 'a')
             {
                 hero.x--;
-                clamp(&hero.x, 0, W - 1);
+                clamp2(hero.x, 0, W - 1);
             }
             else if (cmd == 'w')
             {
@@ -134,6 +164,21 @@ void clamp(int *value , int min_value, int max_value) {
     if (*value >= max_value)
     {
         *value = max_value;
+        return;
+    }
+
+}
+
+void clamp2(int &value , int min_value, int max_value) {
+
+    if (value <= min_value)
+    {
+        value = min_value;
+        return;
+    }
+    if (value >= max_value)
+    {
+        value = max_value;
         return;
     }
 
