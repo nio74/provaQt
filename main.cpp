@@ -65,7 +65,7 @@ char command_prompt(){
 
 void  move_entity(Entity& entity ,int dx, int dy ){
 
-    entity.y += dx;
+    entity.x += dx;
     entity.y += dy;
     clamp2(entity.x,0,W-1);
     clamp2(entity.x,0,H-1);
@@ -130,7 +130,7 @@ int main()
             {
                 move_entity(hero,+1,0);
             }
-            else if (cmd == 'a')
+            else if (cmd == 'a')//muovi sinistra
             {
                 move_entity(hero,-1,0);
             }
