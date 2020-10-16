@@ -74,16 +74,10 @@ void  move_entity(Entity& entity ,int dx, int dy ){
 int main()
 {
 
-    //char hero_glyph = '@';
-    //int hero_x = 5, hero_y = 7;
     Entity hero {5,7,'@'};
     Entity orc{10,10,'*'};
     bool running = true;
 
-    /*
-    cout << "Il nostro eroe " << hero.glyph << " ti saluta \n";
-    cout << "The End \n";
-    */
 
 
     //init Mappa
@@ -92,60 +86,57 @@ int main()
 
     //posizione eroe sulla mappa
 
-
-
-
-
     while (running) {
-            Clear();
-            //print_entity(hero_x, hero_y, hero_glyph);
 
 
-            //stampa mappa
+        Clear();
 
-            for (auto y = 0; y < H; y++)
+        //stampa mappa
+
+        for (auto y = 0; y < H; y++)
+        {
+            for (auto x = 0; x < W; x++)
             {
-                for (auto x = 0; x < W; x++)
+                if (hero.x == x && hero.y == y)
                 {
-                    if (hero.x == x && hero.y == y)
-                    {
-                        cout << hero.glyph;
-                    }else if (orc.x == x && orc.y == y){
-                        cout << orc.glyph;
-                    }
-                    else
-                        cout << map[y][x];
+                    cout << hero.glyph;
+                }else if (orc.x == x && orc.y == y){
+                    cout << orc.glyph;
                 }
+                else
+                    cout << map[y][x];
+            }
 
-                cout << endl;
+            cout << endl;
+        }
 
-            }
-            char cmd = command_prompt();
 
-            if (cmd == 'q')//quit command
-            {
-                running = false;
-            }
-            else if(cmd == 'd')
-            {
-                move_entity(hero,+1,0);
-            }
-            else if (cmd == 'a')//muovi sinistra
-            {
-                move_entity(hero,-1,0);
-            }
-            else if (cmd == 'w')
-            {
-              move_entity(hero,0,-1);
-            }
-            else if (cmd == 's')
-            {
-                move_entity(hero,0,+1);
-            }
+        char cmd = command_prompt();
+
+        switch (cmd) {
+        case 'q':
+            running = false;
+            break;
+        case 'd':
+            move_entity(hero,+1,0);
+            break;
+        case'a':
+            move_entity(hero,-1,0);
+            break;
+        case 'w':
+            move_entity(hero,0,-1);
+            break;
+        case 's':
+            move_entity(hero,0,+1);
+            break;
+
+        }
+
+
     }
 
 
-    return 0;
+
 
 
 
@@ -183,7 +174,7 @@ void clamp2(int &value , int min_value, int max_value) {
 
 
 void print_entity(int x, int y, char glyph)
-    {
-        map[y][x] = glyph;
+{
+    map[y][x] = glyph;
 
-    }
+}
